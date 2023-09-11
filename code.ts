@@ -81,7 +81,6 @@ for (let i = 0; i <= allNodes.length; i++) {
       ycoord: (oneNode.y + (oneNode.height / 2)) 
     }
   
-
     //checks if node has a parent
     if (oneNode.parent) {
       //creates a loop to account for infinite nesting of parent/child nodes
@@ -142,36 +141,35 @@ for (let i = 0; i <= sortedNodes.length; i++) {
     //Custom naming override to pass over anything with an asterisk in the name
     if (oneNode.name.includes('*')) {
       sortedNodes.splice(i, 1);
-          i--
+      i--
     }
   }
 }
 
 //FILLS WITH RANDOM COLOR FROM PALETTE
  
-  // creates an error if no color styles defines
-  if (paintStyles.length != 0){
-    // defines i to +1 to node array # with each loop
-    for (let i = 0; i <= sortedNodes.length; i++) {
-      const oneNode = sortedNodes[i];
-      if (oneNode != undefined && oneNode.fills.length != 0 || undefined) {
-        // gets styleIds from Figma color styles and fill node using modulo to create ordered pattern
-        oneNode.fillStyleId = styleIds[i % styleIds.length];
-      }
+// creates an error if no color styles defines
+if (paintStyles.length != 0){
+  // defines i to +1 to node array # with each loop
+  for (let i = 0; i <= sortedNodes.length; i++) {
+    const oneNode = sortedNodes[i];
+    if (oneNode != undefined && oneNode.fills.length != 0 || undefined) {
+      // gets styleIds from Figma color styles and fill node using modulo to create ordered pattern
+      oneNode.fillStyleId = styleIds[i % styleIds.length];
     }
   }
+}
 
-  else {
-    figma.notify('No color styles found in document.', {timeout: 5000, error: true});
-    }
-
-  // creates an error if nothing is selected
-  if (figma.currentPage.selection.length === 0) {
-    figma.notify('Nothing selected.', {timeout: 5000, error: true});
+else {
+  figma.notify('No color styles found in document.', {timeout: 5000, error: true});
   }
-    
+
+// creates an error if nothing is selected
+if (figma.currentPage.selection.length === 0) {
+  figma.notify('Nothing selected.', {timeout: 5000, error: true});
+}
+
 // Make sure to close the plugin when you're done. Otherwise the plugin will
 // keep running, which shows the cancel button at the bottom of the screen.
 figma.closePlugin();
 }
-
