@@ -6,8 +6,7 @@
   "capabilities": [],
   "enableProposedApi": false,
   "editorType": [
-    "figma",
-    "figjam"
+    "figma"
   ],
   "networkAccess": {
     "allowedDomains": [
